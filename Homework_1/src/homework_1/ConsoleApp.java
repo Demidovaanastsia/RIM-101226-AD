@@ -1,18 +1,18 @@
 package homework_1;
 
-import java.util.*;
+import java.util.*; // импортирование пакетов
 
-public class ConsoleApp {
+public class ConsoleApp { // создание главного класса 
 
-	public static void main(String[] args) {
-
+	public static void main(String[] args) { // главный метод
+// приём пользовательского ввода
 		Scanner in = new Scanner(System.in);
-		System.out.print("Пожалуйста введите данные: ");
+		System.out.print("Пожалуйста введите данные: "); 
 		String lineOfNumbers = in.nextLine();
 
 		in.close();
-
-		boolean maskCheck = lineOfNumbers.matches(
+// проверка введённых данных
+		boolean maskCheck = lineOfNumbers.matches( //
 				"^(?:\\{?\\\"?C[0-9]{3}_[0-9]+-[0-9]+(-[0-9]+)?\\\"?\\}?, ?)*(?:\\{?\\\"?C[0-9]{3}_[0-9]+-[0-9]+(-[0-9]+)?\\\"?\\}? ?){1}$");
 		if (maskCheck) {
 
@@ -25,7 +25,7 @@ public class ConsoleApp {
 			System.exit(0);
 		}
 	}
-
+// получение информации из введённых данных
 	static int[][] numberNormalize(String[] draftListOfNumbers) {
 
 		int[][] cleanListOfNumbers = new int[draftListOfNumbers.length][4];
@@ -53,15 +53,16 @@ public class ConsoleApp {
 
 		return (cleanListOfNumbers);
 	}
-
+// метод вывод информации на экран
 	static void informationOutput(int[][] listOfNumbers) {
+//создание словаря хранящего названия типа авто
 		TreeMap nameCoding = new TreeMap();
 
 		nameCoding.put(100, new String("Легковой авто"));
 		nameCoding.put(200, new String("Грузовой авто"));
 		nameCoding.put(300, new String("Пассажирский транспорт"));
 		nameCoding.put(400, new String("Тяжелая техника(краны)"));
-
+//сбор данных для вывода
 		TreeMap[] costInfo = costGSMClasses(listOfNumbers);
 		TreeMap costGSM = costInfo[0];
 		TreeMap[] boundaryValues = Arrays.copyOfRange(costInfo, 1, 3);
@@ -84,7 +85,7 @@ public class ConsoleApp {
 
 		int[][] sortInfoMileage = sortListOfNumber(sortInfoAdditionParCopy2, 2);
 		int[] numbers = { 100, 200, 300, 400 };
-
+// вывод данных пользователю
 		System.out.println("Расходы на каждый класс авто");
 		Set set1 = costGSM.entrySet();
 		Iterator i1 = set1.iterator();
@@ -170,7 +171,7 @@ public class ConsoleApp {
 			}
 		}
 	}
-
+// метод котроый отвечает за расчет общей, мин., макс. стоимости ГСМ
 	static TreeMap[] costGSMClasses(int[][] listOfNumbers) {
 
 		double costCurrentItem;
@@ -241,7 +242,7 @@ public class ConsoleApp {
 		return results;
 
 	}
-
+//метод который рассчитаывет суммарную стоимость для всех типов
 	static double costGSMTotal(TreeMap costGSM) {
 		double totalCost = 0.0;
 		Set set = costGSM.entrySet();
@@ -253,7 +254,7 @@ public class ConsoleApp {
 		}
 		return totalCost;
 	}
-
+//метод котрый находит минимальное значение
 	static TreeMap calcMinValue(TreeMap boundaryMinValues) {
 		int minType = 0;
 		double minValue = 0.0;
@@ -276,7 +277,7 @@ public class ConsoleApp {
 
 		return minInfo;
 	}
-
+//метод котрый находит Максимальное значение
 	static TreeMap calcMaxValue(TreeMap boundaryMaxValues) {
 		int maxType = 0;
 		double maxValue = 0.0;
@@ -298,7 +299,7 @@ public class ConsoleApp {
 
 		return maxInfo;
 	}
-
+//метод сортировки по указанному значению
 	static int[][] sortListOfNumber(int[][] listOfNumbers, int numOfSortField) {
 
 		for (int elemIter = 1; elemIter < listOfNumbers.length; elemIter++) {
@@ -315,4 +316,4 @@ public class ConsoleApp {
 	}
 }
 
-//{"C100_1-100", "C200_1-120-1200", "C300_1-120-30", "C400_1-80-20", "C100_2-50", "C200_2-40-1000", "C300_2-200-45", "C400_2-10-20", "C100_3-10", "C200_3-170-1100", "C300_3-150-29", "C400_3-100-28", "C100_1-300", "C200_1-100-750", "C300_1-32-15"}
+//Данные для проверки {"C100_1-100", "C200_1-120-1200", "C300_1-120-30", "C400_1-80-20", "C100_2-50", "C200_2-40-1000", "C300_2-200-45", "C400_2-10-20", "C100_3-10", "C200_3-170-1100", "C300_3-150-29", "C400_3-100-28", "C100_1-300", "C200_1-100-750", "C300_1-32-15"}
